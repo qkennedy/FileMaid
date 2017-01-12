@@ -1,0 +1,15 @@
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\FileMaid.exe.config
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\FileMaid.exe
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\FileMaid.pdb
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.csprojResolveAssemblyReference.cache
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\MainWindow.g.cs
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\App.g.cs
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid_MarkupCompile.cache
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid_MarkupCompile.lref
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\MainWindow.baml
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.g.resources
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.Properties.Resources.resources
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.csproj.GenerateResource.Cache
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.exe
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.pdb
