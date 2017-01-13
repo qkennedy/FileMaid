@@ -69,8 +69,8 @@
     <Compile Include="Model\Capitalization.cs" />
     <Compile Include="Model\FileDetailModel.cs" />
     <Compile Include="Model\FileMetaDataModel.cs" />
-    <Compile Include="Model\MainModel.cs" />
     <Compile Include="StringComparator.cs" />
+    <Compile Include="TimeClusterer.cs" />
     <Compile Include="ViewModel\FileDetailsVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="MainWindow.xaml.cs">

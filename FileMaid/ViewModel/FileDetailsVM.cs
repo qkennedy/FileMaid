@@ -8,7 +8,7 @@ namespace FileMaid.ViewModel
 {
     public class FileDetailsVM
     {
-        FileDetailModel model { get; set; }
+        public FileDetailModel model { get; set; }
         public FileDetailsVM(string filePath)
         {
             model = new FileDetailModel(filePath);
@@ -39,6 +39,13 @@ namespace FileMaid.ViewModel
             get
             {
                 return model.info.LastAccessTime.ToShortTimeString();
+            }
+        }
+        public string txtFileExt
+        {
+            get
+            {
+                return model.info.Extension;
             }
         }
 

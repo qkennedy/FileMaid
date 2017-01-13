@@ -33,7 +33,7 @@ namespace FileMaid.Model
         {
             delimiters = new List<char>();
             List<int> delimIndices = new List<int>();
-            //List of Delims it checks for 
+            //List of Delims it checks for C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\Model\
             List<char> commonDelims = new List<char> { ' ', ',', '-', '.', '_' };
             int i;
             foreach (char c in commonDelims)

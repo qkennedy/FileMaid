@@ -9,6 +9,7 @@ namespace FileMaid.Model
     public class FileDetailModel
     {
         public string filePath;
+        public int timeGroup { get; set; }
         public FileMetaDataModel meta { get; set; }
         public FileInfo info
         {
@@ -33,6 +34,11 @@ namespace FileMaid.Model
         private void ReadFileMetaData(string name)
         {
             FileMetaDataModel mod = new FileMetaDataModel(name);
+        }
+        public void moveFile(string path)
+        {
+            path = path + info.Name;
+            info.MoveTo(path);
         }
 
     }
