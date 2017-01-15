@@ -2,6 +2,7 @@
 using FileMaid.ViewModel;
 using static System.Environment;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows.Controls;
 
 namespace FileMaid
 {
@@ -40,6 +41,15 @@ namespace FileMaid
                     break;
             }
 
+        }
+
+        private void selBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var tmp = this.DataContext as MainVM;
+            if (tmp != null)
+            {
+                tmp.excludedFiles.Add((FileDetailsVM)selBox.SelectedItem);
+            }
         }
     }
 }

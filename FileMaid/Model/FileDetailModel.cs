@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Cryptography;
+
 namespace FileMaid.Model
 {
     public class FileDetailModel
@@ -39,6 +41,34 @@ namespace FileMaid.Model
         {
             path = path + info.Name;
             info.MoveTo(path);
+        }
+        private string _checkSum;
+        public string checkSum
+        {
+            get
+            {
+                if (_checkSum == "")
+                {
+                    calcCheckSum();
+                }
+                return _checkSum;
+            }
+            set
+            {
+                _checkSum = value;
+            }
+        }
+        public void calcCheckSum()
+        {
+            using(MD5 md5 = MD5.Create())
+            {
+                using (var stream = new BufferedStream(File.OpenRead(filePath), 1200000))
+                {
+                    byte[] checksum = md5.ComputeHash(stream);
+                    checkSum = BitConverter.ToString(checksum).Replace("-", String.Empty);
+                }
+            }
+            
         }
 
     }

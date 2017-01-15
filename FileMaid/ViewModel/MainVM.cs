@@ -16,6 +16,7 @@ namespace FileMaid.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<FileDetailsVM> details { get; set; }
         public ObservableCollection<FileDetailsVM> selectedFiles { get; set; }
+        public List<FileDetailsVM> excludedFiles { get; set; } = new List<FileDetailsVM>();
         /// <summary>
         /// This is the folder currently chosen as root in MainWindow
         /// </summary>
@@ -83,6 +84,7 @@ namespace FileMaid.ViewModel
                 return _fileExt;
             }
         }
+
         private string _newFolderTitle { get; set; } = "";
         public string newFolderTitle
         {
@@ -104,6 +106,7 @@ namespace FileMaid.ViewModel
                 return _newFolderTitle;
             }
         }
+
 
         private DateTime _startDate { get; set; } = DateTime.Now;
         public DateTime startDate
@@ -145,6 +148,26 @@ namespace FileMaid.ViewModel
             get
             {
                 return _endDate;
+            }
+        }
+        private bool _delDuplicates{ get; set; } = false;
+        public bool delDuplicates
+        {
+
+            set
+            {
+                if (_delDuplicates != value)
+                {
+                    _delDuplicates = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("delDuplicates"));
+                    }
+                }
+            }
+            get
+            {
+                return _delDuplicates;
             }
         }
 
@@ -197,9 +220,48 @@ namespace FileMaid.ViewModel
             Directory.CreateDirectory(newPath);
             foreach(FileDetailsVM f in selectedFiles)
             {
-                f.model.moveFile(newPath);
+                f.model.calcCheckSum();
             }
+            if (delDuplicates)
+            {
+                deleteDuplicates();
+            }
+            
+            foreach (FileDetailsVM f in selectedFiles)
+            {
+                if (!excludedFiles.Contains(f))
+                {
+                    f.model.moveFile(newPath);
+                }
+            }
+            selectedFiles.Clear();
+            excludedFiles.Clear();
             readRoot();
+        }
+        private void deleteDuplicates()
+        {
+            List<FileDetailsVM> tbd = new List<FileDetailsVM>();
+            foreach (FileDetailsVM f in selectedFiles)
+            {
+                Console.Out.WriteLine(f.txtFileTitle + ", " + f.model.checkSum);
+                if (!tbd.Contains(f))
+                {
+                    var query = selectedFiles.Where(x => x.model.checkSum == f.model.checkSum);
+                    foreach (FileDetailsVM g in query)
+                    {
+                        if (g != f)
+                        {
+                            tbd.Add(g);
+                        }
+                        
+                    }
+                }
+            }
+            foreach (FileDetailsVM f in tbd)
+            {
+                selectedFiles.Remove(f);
+                f.model.info.Delete();
+            }
         }
         private void ReadTopFiles(string root)
         {
@@ -261,10 +323,20 @@ namespace FileMaid.ViewModel
         }
         private bool IsBetween(DateTime date)
         {
-            return date.CompareTo(endDate) <= 0 || date.CompareTo(startDate) >= 0;
+            return date.CompareTo(endDate) <= 0 && date.CompareTo(startDate) >= 0;
         }
         #endregion
-
+        public void ToggleSelected(FileDetailsVM det)
+        {
+            if (excludedFiles.Contains(det))
+            {
+                excludedFiles.Remove(det);
+            }
+            else
+            {
+                excludedFiles.Add(det);
+            }
+        }
 
     }
 }
