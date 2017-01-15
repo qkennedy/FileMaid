@@ -17,7 +17,7 @@ namespace FileMaid.Model
             {
                 if (!File.Exists(filePath))
                 {
-                    //return FNF exception
+                    //return FNF exception?
                     return null;
                 }
                 else

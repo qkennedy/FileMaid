@@ -33,7 +33,7 @@ namespace FileMaid.Model
         {
             delimiters = new List<char>();
             List<int> delimIndices = new List<int>();
-            //List of Delims it checks for C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\Model\
+            //List of Delims it checks for
             List<char> commonDelims = new List<char> { ' ', ',', '-', '.', '_' };
             int i;
             foreach (char c in commonDelims)
@@ -64,9 +64,16 @@ namespace FileMaid.Model
 
         public string StripExtension(string text)
         {
-            int last = text.LastIndexOf('.');
-            extension = text.Substring(last, text.Length - last);
-            return text.Substring(0, last);
+            if (text.Contains("."))
+            {
+                int last = text.LastIndexOf('.');
+                extension = text.Substring(last, text.Length - last);
+                return text.Substring(0, last);
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileMaid"
         xmlns:vm="clr-namespace:FileMaid.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="750">
+        Title="FileMaid" Height="500" Width="1000">
     <Window.DataContext>
         <vm:MainVM/>
     </Window.DataContext>
@@ -19,25 +19,32 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="179*"/>
-            <ColumnDefinition Width="96*"/>
-            <ColumnDefinition Width="182*"/>
-            <ColumnDefinition Width="265*"/>
+            <ColumnDefinition Width="209*" MaxWidth="215"/>
+            <ColumnDefinition Width="350*"/>
+            <ColumnDefinition Width="350*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="37*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="18*"/>
-            <RowDefinition Height="19*"/>
-            <RowDefinition Height="332*"/>
-            <RowDefinition Height="43*"/>
+            <RowDefinition Height="34*" MinHeight="30" MaxHeight="40"/>
+            <RowDefinition Height="34*" MinHeight="30" MaxHeight="40"/>
+            <RowDefinition Height="34*" MinHeight="30" MaxHeight="40"/>
+            <RowDefinition Height="34*" MinHeight="30" MaxHeight="40"/>
+            <RowDefinition Height="34*" MinHeight="30" MaxHeight="40"/>
+            <RowDefinition Height="34*" MinHeight="30" MaxHeight="40"/>
+            <RowDefinition Height="227*"/>
+            <RowDefinition Height="39*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox" Grid.ColumnSpan="1" HorizontalAlignment="Center" Height="22" Grid.Column="0" 
-                 Text="{Binding rootFolder, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="120" Margin="32,13,32,2"/>
-        <Button Grid.Column="1" Grid.Row="0" Content="Start" Margin="10,5,10,5"
-                Command="{Binding readRootCommand}"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Root:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox HorizontalAlignment="Center" x:Name="txtFile"
+                 Text="{Binding rootFolder, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="120"/>
+            <Button x:Name="BtnFileOpen" Background="#9999FF" Content="..." Margin="2,5,2,5" Click="BtnFileOpen_Click"/>
 
-        <ListBox x:Name="box" Grid.Column="2" Grid.Row="1" ItemsSource="{Binding details}" Margin="5,5,5,5" Grid.RowSpan="5">
+
+            <Button x:Name="setBtn" Content="Set" Margin="6" BorderThickness="0" Width="25"
+                Command="{Binding readRootCommand}"  Background="#9999FF"/>
+        </StackPanel>
+        <TextBlock Grid.Column="1" FontSize="14" Text="All Files" Margin="5"/>
+        <ListBox x:Name="box" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding details}" Margin="5,5,5,5" Grid.RowSpan="7">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -48,33 +55,38 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="selBox" Grid.Column="3" Grid.Row="1" ItemsSource="{Binding selectedFiles}" Margin="5,5,5,5" Grid.RowSpan="5">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding txtFileTitle}" />
-                        <TextBlock Text="{Binding txtFileSize}"/>
-                        <TextBlock Text="{Binding txtFileAccDate}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <TextBlock Grid.Column="2" FontSize="14" Text="Selected Files" Margin="5"/>
+            <ListBox x:Name="selBox"  ItemsSource="{Binding selectedFiles}" Margin="5,5,5,5" Grid.Column="2" Grid.Row="1" Grid.RowSpan="6"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding txtFileTitle}" Margin="5" />
+                            <TextBlock Text="{Binding txtFileSize}" Margin="5" />
+                            <TextBlock Text="{Binding txtFileAccDate}" Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        <Button Background="#9999FF" Grid.Row="7" Grid.Column="3" Content="Move Files" Margin="5" FontSize="16"/>
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Keyword:" HorizontalAlignment="Left"/>
-            <TextBox Text="{Binding keyword, UpdateSourceTrigger=PropertyChanged}" Width="120" />
+            <TextBlock Text="Keyword:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Text="{Binding keyword, UpdateSourceTrigger=PropertyChanged}" Width="140" Margin="8,6,5,6" />
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Extension:" HorizontalAlignment="Left"/>
-            <TextBox Text="{Binding fileExt, UpdateSourceTrigger=PropertyChanged}" Width="120" />
+            <TextBlock Text="Extension:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Text="{Binding fileExt, UpdateSourceTrigger=PropertyChanged}" Width="140" Margin="5"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
-            <TextBlock Text="New Folder Title:" HorizontalAlignment="Left"/>
-            <TextBox Text="{Binding newFolderTitle, UpdateSourceTrigger=PropertyChanged}" Width="100" />
+            <TextBlock Text="Group Title:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding newFolderTitle, UpdateSourceTrigger=PropertyChanged}" Width="140" Margin="5" />
         </StackPanel>
-        <StackPanel Grid.Column="3" Grid.Row= "1" Grid.RowSpan="5">
-            <TextBlock Text="{Binding ElementName= box, Path = SelectedItem.txt}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <TextBlock Text="Start Date:" VerticalAlignment="Center" Margin="5"/>
+            <DatePicker Margin="5" Width="135" SelectedDate="{Binding startDate}"/>
         </StackPanel>
-        <Button Grid.Column="1" Grid.Row="3" Content="Move Files"
-                Command="{Binding moveFilesCommand}"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="5">
+            <TextBlock Text="End Date:" VerticalAlignment="Center" Margin="5"/>
+            <DatePicker Margin="10,5,5,5" Width="135" SelectedDate="{Binding endDate}"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -105,6 +105,49 @@ namespace FileMaid.ViewModel
             }
         }
 
+        private DateTime _startDate { get; set; } = DateTime.Now;
+        public DateTime startDate
+        {
+
+            set
+            {
+                if (_startDate != value)
+                {
+                    _startDate = value;
+                    updateSelFiles();
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("startDate"));
+                    }
+                }
+            }
+            get
+            {
+                return _startDate;
+            }
+        }
+        private DateTime _endDate { get; set; } = DateTime.Now;
+        public DateTime endDate
+        {
+
+            set
+            {
+                if (_endDate != value)
+                {
+                    _endDate = value;
+                    updateSelFiles();
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged(this, new PropertyChangedEventArgs("endDate"));
+                    }
+                }
+            }
+            get
+            {
+                return _endDate;
+            }
+        }
+
         public MainVM()
         {
             this.rootFolder = "C:/TestFolder";
@@ -122,7 +165,7 @@ namespace FileMaid.ViewModel
         {
             get
             {
-                return _readRootCommand ?? (_readRootCommand = new CommandHandler(() => ReadRoot(), _canreadRoot));
+                return _readRootCommand ?? (_readRootCommand = new CommandHandler(() => readRoot(), _canreadRoot));
             }
         }
 
@@ -144,7 +187,7 @@ namespace FileMaid.ViewModel
         #endregion
 
         #region Stuff that should be in Model
-        private void ReadRoot()
+        private void readRoot()
         {
             ReadTopFiles(rootFolder);
         }
@@ -156,6 +199,7 @@ namespace FileMaid.ViewModel
             {
                 f.model.moveFile(newPath);
             }
+            readRoot();
         }
         private void ReadTopFiles(string root)
         {
@@ -184,7 +228,7 @@ namespace FileMaid.ViewModel
         /// Going to have this be a LINQ select that changes selected files, should eventually move the full list to a model,
         /// have the observable collection be changeable by this 
         /// </summary>
-        /// <param name="keyword"></param>
+        /// <param name="keyword"> This is the key word to search for</param>
         private List<FileDetailsVM> selectByKeyword()
         {
             var query = details.Where(x => x.txtFileTitle.Contains(keyword));
@@ -204,6 +248,20 @@ namespace FileMaid.ViewModel
                 list.Add(f);
             }
             return list;
+        }
+        private List<FileDetailsVM> selectByDate()
+        {
+            var query = details.Where(x => IsBetween(x.model.info.LastAccessTime));
+            List<FileDetailsVM> list = new List<FileDetailsVM>();
+            foreach (FileDetailsVM f in query)
+            {
+                list.Add(f);
+            }
+            return list;
+        }
+        private bool IsBetween(DateTime date)
+        {
+            return date.CompareTo(endDate) <= 0 || date.CompareTo(startDate) >= 0;
         }
         #endregion
 

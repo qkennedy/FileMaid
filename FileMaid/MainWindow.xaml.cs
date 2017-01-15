@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using FileMaid.ViewModel;
+using static System.Environment;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace FileMaid
 {
@@ -23,6 +13,33 @@ namespace FileMaid
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void BtnFileOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (System.IO.Directory.Exists(txtFile.Text))
+            {
+                dialog.InitialDirectory = txtFile.Text;
+            }
+            var result = dialog.ShowDialog();
+            switch (result)
+            {
+                case CommonFileDialogResult.Ok:
+                    var file = dialog.FileName;
+                    txtFile.Text = file;
+                    txtFile.ToolTip = file;
+                    var tmp = (MainVM)this.DataContext;
+                    tmp.readRootCommand.Execute(this);
+
+                    break;
+                case CommonFileDialogResult.Cancel:
+                default:
+                    txtFile.Text = null;
+                    txtFile.ToolTip = null;
+                    break;
+            }
+
         }
     }
 }

@@ -13,3 +13,8 @@ C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug
 C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.csproj.GenerateResource.Cache
 C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.exe
 C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\obj\Debug\FileMaid.pdb
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\Quinn\Documents\Visual Studio 2015\Projects\FileMaid\FileMaid\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
